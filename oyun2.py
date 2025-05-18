@@ -6,7 +6,7 @@ import random
 import hashlib
 import sys
 
-# Loglama ayarları
+
 logging.basicConfig(filename='game_app.log', level=logging.DEBUG, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -103,7 +103,7 @@ class Player:
     def get_recommendations(self, all_games):
         try:
             if not self.favorites:
-                return random.sample(all_games, min(3, len(all_games)))  # Rastgele 3 oyun
+                return random.sample(all_games, min(3, len(all_games)))  
             favorite_genres = {self.collection[game_id].genre for game_id in self.favorites}
             favorite_platforms = {self.collection[game_id].platform for game_id in self.favorites}
             recommendations = [
@@ -123,33 +123,33 @@ class LoginApp:
             self.on_login_success = on_login_success
             self.root.title("Gamer Arena - Giriş")
             self.root.geometry("400x300")
-            self.root.configure(bg="#12032b")  # Neon morumsu arka plan
+            self.root.configure(bg="#12032b")  
             logging.info("Giriş ekranı başlatılıyor")
 
-            # Kullanıcılar bellekte saklanacak
-            self.users = {}  # {username: hashed_password}
+            
+            self.users = {}  
 
-            # Stil
+            
             style = ttk.Style()
             style.configure("TButton", padding=8, font=("Arial", 12, "bold"), background="#ffcc00", foreground="#000000")
             style.map("TButton",
-                      background=[("active", "#00ff00")],  # Hover neon yeşil
+                      background=[("active", "#00ff00")],  
                       foreground=[("active", "#000000")])
             style.configure("TLabel", background="#12032b", foreground="#00ffcc", font=("Arial", 11, "bold"))
             style.configure("TEntry", padding=5, font=("Arial", 11))
 
-            # Ana çerçeve
+            
             self.main_frame = tk.Frame(self.root, bg="#12032b")
             self.main_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
 
-            # Başlık
+            
             tk.Label(self.main_frame, text="🎮 Gamer Arena", font=("Arial", 24, "bold"), bg="#12032b", fg="#ff0066").pack(pady=10)
 
-            # Sekmeler
+            
             self.notebook = ttk.Notebook(self.main_frame)
             self.notebook.pack(fill=tk.BOTH, expand=True)
 
-            # Giriş sekmesi
+            
             self.login_frame = tk.Frame(self.notebook, bg="#12032b")
             self.notebook.add(self.login_frame, text="Giriş Yap")
             tk.Label(self.login_frame, text="Kullanıcı Adı:", bg="#12032b", fg="#00ffcc").pack(pady=5)
@@ -160,7 +160,7 @@ class LoginApp:
             tk.Entry(self.login_frame, textvariable=self.login_password_var, show="*", font=("Arial", 11), bg="#1a0b3d", fg="#00ffcc", insertbackground="#00ffcc").pack(pady=5)
             ttk.Button(self.login_frame, text="Giriş Yap", command=self.login).pack(pady=10)
 
-            # Kayıt sekmesi
+           
             self.register_frame = tk.Frame(self.notebook, bg="#12032b")
             self.notebook.add(self.register_frame, text="Kayıt Ol")
             tk.Label(self.register_frame, text="Kullanıcı Adı:", bg="#12032b", fg="#00ffcc").pack(pady=5)
@@ -207,7 +207,7 @@ class LoginApp:
             self.users[username] = hashed_password
             messagebox.showinfo("Başarılı", f"Kayıt oldun, {username}! Şimdi giriş yap!")
             logging.info(f"Kayıt başarılı: {username}")
-            self.notebook.select(self.login_frame)  # Giriş sekmesine geç
+            self.notebook.select(self.login_frame)  
         except Exception as e:
             logging.error(f"Kayıt hatası: {str(e)}")
             messagebox.showerror("Hata", str(e))
@@ -219,31 +219,31 @@ class GameApp:
             self.username = username
             self.root.title("Gamer Arena")
             self.root.geometry("750x600")
-            self.root.configure(bg="#12032b")  # Neon morumsu arka plan
+            self.root.configure(bg="#12032b")  
             logging.info(f"Uygulama başlatılıyor: {username}")
 
             self.player = Player()
             self.all_games = self.preload_games()
 
-            # Stil
+          
             style = ttk.Style()
             style.configure("TButton", padding=8, font=("Arial", 12, "bold"), background="#ffcc00", foreground="#000000")
             style.map("TButton",
-                      background=[("active", "#00ff00")],  # Hover neon yeşil
+                      background=[("active", "#00ff00")],  
                       foreground=[("active", "#000000")])
             style.configure("TLabel", background="#12032b", foreground="#00ffcc", font=("Arial", 11, "bold"))
             style.configure("TEntry", padding=5, font=("Arial", 11))
             style.configure("Treeview", background="#1a0b3d", foreground="#00ffcc", fieldbackground="#1a0b3d", font=("Arial", 11))
             style.map("Treeview", background=[("selected", "#ff0066")])
 
-            # Ana çerçeve
+            
             self.main_frame = tk.Frame(self.root, bg="#12032b")
             self.main_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
 
-            # Başlık
+            
             tk.Label(self.main_frame, text=f"🎮 Gamer Arena - {username}", font=("Arial", 24, "bold"), bg="#12032b", fg="#ff0066").pack(pady=10)
 
-            # Önerilen oyunlar
+            
             tk.Label(self.main_frame, text="🔥 Sana Özel Öneriler", font=("Arial", 16, "bold"), bg="#12032b", fg="#ffcc00").pack(anchor="w", pady=5)
             self.recommend_frame = tk.Frame(self.main_frame, bg="#12032b")
             self.recommend_frame.pack(fill=tk.X, pady=5)
@@ -253,7 +253,7 @@ class GameApp:
                 lbl.pack(side=tk.LEFT, padx=5, fill=tk.X, expand=True)
                 self.recommend_labels.append(lbl)
 
-            # Arama ve filtreleme
+            
             search_frame = tk.Frame(self.main_frame, bg="#12032b")
             search_frame.pack(fill=tk.X, pady=10)
             tk.Label(search_frame, text="🔍 Oyun Ara:", bg="#12032b", fg="#00ffcc").pack(side=tk.LEFT, padx=5)
@@ -270,11 +270,11 @@ class GameApp:
             tk.Entry(filter_frame, textvariable=self.platform_var, width=15, font=("Arial", 11), bg="#1a0b3d", fg="#00ffcc", insertbackground="#00ffcc").pack(side=tk.LEFT, padx=5)
             ttk.Button(filter_frame, text="Filtrele", command=self.show_games).pack(side=tk.LEFT, padx=5)
 
-            # Sekmeler
+            
             self.notebook = ttk.Notebook(self.main_frame)
             self.notebook.pack(fill=tk.BOTH, expand=True, pady=10)
 
-            # Koleksiyon sekmesi
+            
             self.collection_frame = tk.Frame(self.notebook, bg="#12032b")
             self.notebook.add(self.collection_frame, text="🎲 Koleksiyonum")
             self.collection_tree = ttk.Treeview(self.collection_frame, columns=("Name", "Genre", "Platform", "Rating"), show="headings")
@@ -289,7 +289,7 @@ class GameApp:
             self.collection_tree.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
             self.collection_tree.bind("<<TreeviewSelect>>", self.on_collection_select)
 
-            # Tüm oyunlar sekmesi
+           
             self.all_games_frame = tk.Frame(self.notebook, bg="#12032b")
             self.notebook.add(self.all_games_frame, text="🕹️ Tüm Oyunlar")
             self.game_tree = ttk.Treeview(self.all_games_frame, columns=("Name", "Genre", "Platform", "Rating"), show="headings")
@@ -304,7 +304,7 @@ class GameApp:
             self.game_tree.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
             self.game_tree.bind("<<TreeviewSelect>>", self.on_game_select)
 
-            # Butonlar
+           
             button_frame = tk.Frame(self.main_frame, bg="#12032b")
             button_frame.pack(fill=tk.X, pady=10)
             ttk.Button(button_frame, text="Yeni Oyun", command=self.add_game_window).pack(side=tk.LEFT, padx=5)
@@ -313,7 +313,7 @@ class GameApp:
             ttk.Button(button_frame, text="Yorum Yap", command=self.comment_game).pack(side=tk.LEFT, padx=5)
             ttk.Button(button_frame, text="Favori Yap", command=self.add_favorite).pack(side=tk.LEFT, padx=5)
 
-            # Yorumlar
+            
             tk.Label(self.main_frame, text="💬 Yorumlar:", bg="#12032b", fg="#00ffcc").pack(anchor="w", pady=5)
             self.comments_text = tk.Text(self.main_frame, height=4, bg="#1a0b3d", fg="#00ffcc", font=("Arial", 11))
             self.comments_text.pack(fill=tk.X, pady=5)
@@ -449,19 +449,19 @@ class GameApp:
             selected = self.game_tree.selection()
             if not selected:
                 raise ValueError("Bir oyun seç, kanka!")
-            selected_item = selected[0]  # İlk seçili öğeyi al
+            selected_item = selected[0]  
             tags = self.game_tree.item(selected_item).get("tags", [])
             if not tags:
                 raise ValueError("Seçilen oyunun ID’si bulunamadı, kanka!")
             game_id = tags[0]
             logging.debug(f"Seçilen oyun ID: {game_id}")
 
-            # Oyun listesinde var mı kontrol et
+            
             game = next((g for g in self.all_games if g.game_id == game_id), None)
             if not game:
                 raise ValueError("Seçilen oyun bulunamadı!")
 
-            # Koleksiyona ekle
+            
             added = self.player.add_to_collection(game)
             if added:
                 self.show_collection()
