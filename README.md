@@ -21,12 +21,12 @@ Emoji Desteği: 🎮🔍💬 ile samimi ve eğlenceli vibe.
 
 Giriş Ekranı
 
-<img src="https://github.com/rojatkrty/oyun_app/blob/main/oyun_ss/login.png" alt="Paris">
+<img src="https://github.com/rojatkrty/oyun_app/blob/main/oyun_ss/login.png" alt="login">
 
 
 Ana Ekran
 
-<img src="https://github.com/rojatkrty/oyun_app/blob/main/oyun_ss/main.png" alt="Paris">
+<img src="https://github.com/rojatkrty/oyun_app/blob/main/oyun_ss/main.png" alt="main" width='400'>
 
 🚀 Kurulum
 Gamer Arena’yı çalıştırmak için aşağıdaki adımları izleyin:
