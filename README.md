@@ -21,7 +21,7 @@ Emoji Desteği: 🎮🔍💬 ile samimi ve eğlenceli vibe.
 
 Giriş Ekranı
 
-<img src="(https://github.com/rojatkrty/oyun_app/blob/main/oyun_ss/login.png)" alt="Paris">
+<img src="https://github.com/rojatkrty/oyun_app/blob/main/oyun_ss/login.png" alt="Paris">
 
 
 Ana Ekran
